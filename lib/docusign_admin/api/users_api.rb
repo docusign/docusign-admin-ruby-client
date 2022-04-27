@@ -13,6 +13,27 @@ require "uri"
 
 module DocuSign_Admin
 
+  class GetUserDSProfileOptions
+    # Sorts user information by account name ascending
+    attr_accessor :sort
+
+    def self.default
+      @@default ||= GetUserDSProfileOptions.new
+    end
+  end
+
+  class GetUserDSProfilesByEmailOptions
+    # The email address of the user
+    attr_accessor :email
+
+    # Sorts user information by account name ascending
+    attr_accessor :sort
+
+    def self.default
+      @@default ||= GetUserDSProfilesByEmailOptions.new
+    end
+  end
+
   class GetUserProfilesOptions
     # The email address
     attr_accessor :email
@@ -416,6 +437,119 @@ module DocuSign_Admin
         :return_type => 'DeleteResponse')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: UsersApi#delete_identities\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Returns user information using the userId for lookup.
+    # Required scopes: user_read
+    # @param organization_id The organization ID Guid
+    # @param user_id The user ID Guid
+    # @param DocuSign_Admin::GetUserDSProfileOptions Options for modifying the behavior of the function.
+    # @return [UsersDrilldownResponse]
+    def get_user_ds_profile(organization_id, user_id, options = DocuSign_Admin::GetUserDSProfileOptions.default)
+      data, _status_code, _headers = get_user_ds_profile_with_http_info(organization_id, user_id, options)
+      return data
+    end
+
+    # Returns user information using the userId for lookup.
+    # Required scopes: user_read
+    # @param organization_id The organization ID Guid
+    # @param user_id The user ID Guid
+    # @param DocuSign_Admin::GetUserDSProfileOptions Options for modifying the behavior of the function.
+    # @return [Array<(UsersDrilldownResponse, Fixnum, Hash)>] UsersDrilldownResponse data, response status code and response headers
+    def get_user_ds_profile_with_http_info(organization_id, user_id, options = DocuSign_Admin::GetUserDSProfileOptions.default)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: UsersApi.get_user_ds_profile ..."
+      end
+      # verify the required parameter 'organization_id' is set
+      fail ArgumentError, "Missing the required parameter 'organization_id' when calling UsersApi.get_user_ds_profile" if organization_id.nil?
+      # verify the required parameter 'user_id' is set
+      fail ArgumentError, "Missing the required parameter 'user_id' when calling UsersApi.get_user_ds_profile" if user_id.nil?
+      # resource path
+      local_var_path = "/v2.1/organizations/{organizationId}/users/{userId}/dsprofile".sub('{format}','json').sub('{' + 'organizationId' + '}', organization_id.to_s).sub('{' + 'userId' + '}', user_id.to_s)
+
+      # query parameters
+      query_params = {}
+      query_params[:'sort'] = options.sort if !options.sort.nil?
+
+      # header parameters
+      header_params = {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = nil
+      auth_names = []
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'UsersDrilldownResponse')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: UsersApi#get_user_ds_profile\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Returns DS user profile information.
+    # Required scopes: user_read
+    # @param organization_id The organization ID Guid
+    # @param DocuSign_Admin::GetUserDSProfilesByEmailOptions Options for modifying the behavior of the function.
+    # @return [UsersDrilldownResponse]
+    def get_user_ds_profiles_by_email(organization_id, options = DocuSign_Admin::GetUserDSProfilesByEmailOptions.default)
+      data, _status_code, _headers = get_user_ds_profiles_by_email_with_http_info(organization_id, options)
+      return data
+    end
+
+    # Returns DS user profile information.
+    # Required scopes: user_read
+    # @param organization_id The organization ID Guid
+    # @param DocuSign_Admin::GetUserDSProfilesByEmailOptions Options for modifying the behavior of the function.
+    # @return [Array<(UsersDrilldownResponse, Fixnum, Hash)>] UsersDrilldownResponse data, response status code and response headers
+    def get_user_ds_profiles_by_email_with_http_info(organization_id, options = DocuSign_Admin::GetUserDSProfilesByEmailOptions.default)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: UsersApi.get_user_ds_profiles_by_email ..."
+      end
+      # verify the required parameter 'organization_id' is set
+      fail ArgumentError, "Missing the required parameter 'organization_id' when calling UsersApi.get_user_ds_profiles_by_email" if organization_id.nil?
+      # resource path
+      local_var_path = "/v2.1/organizations/{organizationId}/users/dsprofile".sub('{format}','json').sub('{' + 'organizationId' + '}', organization_id.to_s)
+
+      # query parameters
+      query_params = {}
+      query_params[:'email'] = options.email if !options.email.nil?
+      query_params[:'sort'] = options.sort if !options.sort.nil?
+
+      # header parameters
+      header_params = {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = nil
+      auth_names = []
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'UsersDrilldownResponse')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: UsersApi#get_user_ds_profiles_by_email\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
