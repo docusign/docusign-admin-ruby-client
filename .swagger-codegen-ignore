@@ -37,14 +37,9 @@ LICENSE
 Gemfile
 Gemfile.lock
 Rakefile
-docusign_admin.gemspec
-
 
 # Specific src and test files
 .rspec
 docs/
 spec/
 tests/
-lib/docusign_admin/client/
-lib/docusign_admin/api_error.rb
-lib/docusign_admin/api_client.rb
