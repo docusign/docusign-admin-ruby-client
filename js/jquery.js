@@ -1,1 +1,1 @@
-// ../../../../../../../../share/javascript/jquery/jquery.min.js
+../../../../../../../../share/javascript/jquery/jquery.min.js
