@@ -35,7 +35,7 @@ module DocuSign_Admin
     # @option config [Configuration] Configuration for initializing the object, default to Configuration.default
     def initialize(config = Configuration.default)
       @config = config
-      @user_agent = "Swagger-Codegen/1.1.0/ruby"
+      @user_agent = "Swagger-Codegen/1.2.0/ruby"
       @default_headers = {
         'Content-Type' => "application/json",
         'User-Agent' => @user_agent
@@ -107,10 +107,6 @@ module DocuSign_Admin
       # set ssl_verifyhosts option based on @config.verify_ssl_host (true/false)
       _verify_ssl_host = @config.verify_ssl_host ? 2 : 0
       
-      if header_params['Content-Type'] == 'multipart/form-data'
-        header_params['Content-Disposition'] = 'form-data; name=file; filename=file.csv'
-      end
-
       req_opts = {
         :method => http_method,
         :headers => header_params,
@@ -285,7 +281,8 @@ module DocuSign_Admin
             # let typhoeus handle File, Array and nil parameters
             data[key] = value
           else
-            if key == 'file.csv'
+            if header_params['Content-Type'] == 'multipart/form-data'
+              header_params['Content-Disposition'] = 'form-data; name=file; filename=' + key
               data = value
             else
               data[key] = value.to_s
