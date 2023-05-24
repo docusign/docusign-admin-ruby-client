@@ -1,3 +1,8 @@
+## [v1.2.0] - Admin API v2.1-1.2.0 - 2023-05-21
+### Changed
+- Added support for version v2.1-1.2.0 of the DocuSign Admin API.
+- Updated the SDK release version.
+
 ## [v1.1.0] - Admin API v2.1-1.1.0 - 2022-04-26
 ### Changed
 - Added support for version v2.1-1.1.0 of the DocuSign Admin API.

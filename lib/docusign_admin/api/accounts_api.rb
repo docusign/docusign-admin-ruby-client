@@ -209,5 +209,60 @@ module DocuSign_Admin
       end
       return data, status_code, headers
     end
+
+    # Redacts membership data for users with memberships in an account.
+    # Required scopes: user_data_redact
+    # @param account_id The account ID Guid
+    # @param request_model The request body describing the membership to be redacted 
+    # @return [IndividualUserDataRedactionResponse]
+    def redact_individual_membership_data(account_id, request_model)
+      data, _status_code, _headers = redact_individual_membership_data_with_http_info(account_id,  request_model)
+      return data
+    end
+
+    # Redacts membership data for users with memberships in an account.
+    # Required scopes: user_data_redact
+    # @param account_id The account ID Guid
+    # @param request_model The request body describing the membership to be redacted 
+    # @return [Array<(IndividualUserDataRedactionResponse, Fixnum, Hash)>] IndividualUserDataRedactionResponse data, response status code and response headers
+    def redact_individual_membership_data_with_http_info(account_id, request_model)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: AccountsApi.redact_individual_membership_data ..."
+      end
+      # verify the required parameter 'account_id' is set
+      fail ArgumentError, "Missing the required parameter 'account_id' when calling AccountsApi.redact_individual_membership_data" if account_id.nil?
+      # verify the required parameter 'request_model' is set
+      fail ArgumentError, "Missing the required parameter 'request_model' when calling AccountsApi.redact_individual_membership_data" if request_model.nil?
+      # resource path
+      local_var_path = "/v2/data_redaction/accounts/{accountId}/user".sub('{format}','json').sub('{' + 'accountId' + '}', account_id.to_s)
+
+      # query parameters
+      query_params = {}
+
+      # header parameters
+      header_params = {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = @api_client.object_to_http_body(request_model)
+      auth_names = []
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'IndividualUserDataRedactionResponse')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AccountsApi#redact_individual_membership_data\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
   end
 end

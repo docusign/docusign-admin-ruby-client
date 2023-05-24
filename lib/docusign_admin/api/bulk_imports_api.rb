@@ -24,7 +24,7 @@ module DocuSign_Admin
     # Creates a new account settings import request.
     # Required scopes: account_write
     # @param organization_id The organization ID Guid
-    # @param file_csv CSV file.
+    # @param file_csv CSV file. 
     # @return [OrganizationAccountSettingsImportResponse]
     def add_bulk_account_settings_import(organization_id, file_csv)
       data, _status_code, _headers = add_bulk_account_settings_import_with_http_info(organization_id, file_csv)
@@ -34,7 +34,7 @@ module DocuSign_Admin
     # Creates a new account settings import request.
     # Required scopes: account_write
     # @param organization_id The organization ID Guid
-    # @param file_csv CSV file.
+    # @param file_csv CSV file. 
     # @return [Array<(OrganizationAccountSettingsImportResponse, Fixnum, Hash)>] OrganizationAccountSettingsImportResponse data, response status code and response headers
     def add_bulk_account_settings_import_with_http_info(organization_id, file_csv)
       if @api_client.config.debugging
@@ -80,7 +80,7 @@ module DocuSign_Admin
     # Import request for adding users to accounts within the organization.
     # Required scopes: user_write
     # @param organization_id The organization ID Guid
-    # @param file_csv CSV file.
+    # @param file_csv CSV file. 
     # @return [OrganizationImportResponse]
     def create_bulk_import_add_users_request(organization_id, file_csv)
       data, _status_code, _headers = create_bulk_import_add_users_request_with_http_info(organization_id, file_csv)
@@ -90,7 +90,7 @@ module DocuSign_Admin
     # Import request for adding users to accounts within the organization.
     # Required scopes: user_write
     # @param organization_id The organization ID Guid
-    # @param file_csv CSV file.
+    # @param file_csv CSV file. 
     # @return [Array<(OrganizationImportResponse, Fixnum, Hash)>] OrganizationImportResponse data, response status code and response headers
     def create_bulk_import_add_users_request_with_http_info(organization_id, file_csv)
       if @api_client.config.debugging
@@ -136,22 +136,26 @@ module DocuSign_Admin
     # Closes the Bulk User Import request
     # Required scopes: user_write
     # @param organization_id The organization ID Guid
+    # @param file_csv CSV file. 
     # @return [OrganizationImportResponse]
-    def create_bulk_import_close_users_request(organization_id)
-      data, _status_code, _headers = create_bulk_import_close_users_request_with_http_info(organization_id)
+    def create_bulk_import_close_users_request(organization_id, file_csv)
+      data, _status_code, _headers = create_bulk_import_close_users_request_with_http_info(organization_id, file_csv)
       return data
     end
 
     # Closes the Bulk User Import request
     # Required scopes: user_write
     # @param organization_id The organization ID Guid
+    # @param file_csv CSV file. 
     # @return [Array<(OrganizationImportResponse, Fixnum, Hash)>] OrganizationImportResponse data, response status code and response headers
-    def create_bulk_import_close_users_request_with_http_info(organization_id)
+    def create_bulk_import_close_users_request_with_http_info(organization_id, file_csv)
       if @api_client.config.debugging
         @api_client.config.logger.debug "Calling API: BulkImportsApi.create_bulk_import_close_users_request ..."
       end
       # verify the required parameter 'organization_id' is set
       fail ArgumentError, "Missing the required parameter 'organization_id' when calling BulkImportsApi.create_bulk_import_close_users_request" if organization_id.nil?
+      # verify the required parameter 'file_csv' is set
+      fail ArgumentError, "Missing the required parameter 'file_csv' when calling BulkImportsApi.create_bulk_import_close_users_request" if file_csv.nil?
       # resource path
       local_var_path = "/v2/organizations/{organizationId}/imports/bulk_users/close".sub('{format}','json').sub('{' + 'organizationId' + '}', organization_id.to_s)
 
@@ -163,10 +167,11 @@ module DocuSign_Admin
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json'])
       # HTTP header 'Content-Type'
-      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+      header_params['Content-Type'] = @api_client.select_header_content_type(['multipart/form-data'])
 
       # form parameters
       form_params = {}
+      form_params["file.csv"] = file_csv
 
       # http body (model)
       post_body = nil
@@ -239,9 +244,10 @@ module DocuSign_Admin
     # Required scopes: user_write
     # @param organization_id The organization ID Guid
     # @param account_id The account ID Guid
+    # @param file_csv CSV file. 
     # @return [OrganizationImportResponse]
-    def create_bulk_import_single_account_add_users_request(organization_id, account_id)
-      data, _status_code, _headers = create_bulk_import_single_account_add_users_request_with_http_info(organization_id, account_id)
+    def create_bulk_import_single_account_add_users_request(organization_id, account_id, file_csv)
+      data, _status_code, _headers = create_bulk_import_single_account_add_users_request_with_http_info(organization_id, account_id, file_csv)
       return data
     end
 
@@ -249,8 +255,9 @@ module DocuSign_Admin
     # Required scopes: user_write
     # @param organization_id The organization ID Guid
     # @param account_id The account ID Guid
+    # @param file_csv CSV file. 
     # @return [Array<(OrganizationImportResponse, Fixnum, Hash)>] OrganizationImportResponse data, response status code and response headers
-    def create_bulk_import_single_account_add_users_request_with_http_info(organization_id, account_id)
+    def create_bulk_import_single_account_add_users_request_with_http_info(organization_id, account_id, file_csv)
       if @api_client.config.debugging
         @api_client.config.logger.debug "Calling API: BulkImportsApi.create_bulk_import_single_account_add_users_request ..."
       end
@@ -297,9 +304,10 @@ module DocuSign_Admin
     # Required scopes: user_write
     # @param organization_id The organization ID Guid
     # @param account_id The account ID Guid
+    # @param file_csv CSV file. 
     # @return [OrganizationImportResponse]
-    def create_bulk_import_single_account_update_users_request(organization_id, account_id)
-      data, _status_code, _headers = create_bulk_import_single_account_update_users_request_with_http_info(organization_id, account_id)
+    def create_bulk_import_single_account_update_users_request(organization_id, account_id, file_csv)
+      data, _status_code, _headers = create_bulk_import_single_account_update_users_request_with_http_info(organization_id, account_id, file_csv)
       return data
     end
 
@@ -307,8 +315,9 @@ module DocuSign_Admin
     # Required scopes: user_write
     # @param organization_id The organization ID Guid
     # @param account_id The account ID Guid
+    # @param file_csv CSV file. 
     # @return [Array<(OrganizationImportResponse, Fixnum, Hash)>] OrganizationImportResponse data, response status code and response headers
-    def create_bulk_import_single_account_update_users_request_with_http_info(organization_id, account_id)
+    def create_bulk_import_single_account_update_users_request_with_http_info(organization_id, account_id, file_csv)
       if @api_client.config.debugging
         @api_client.config.logger.debug "Calling API: BulkImportsApi.create_bulk_import_single_account_update_users_request ..."
       end
@@ -354,17 +363,19 @@ module DocuSign_Admin
     # Import request for updating users to accounts within the organization.
     # Required scopes: user_write
     # @param organization_id The organization ID Guid
+    # @param file_csv CSV file. 
     # @return [OrganizationImportResponse]
-    def create_bulk_import_update_users_request(organization_id)
-      data, _status_code, _headers = create_bulk_import_update_users_request_with_http_info(organization_id)
+    def create_bulk_import_update_users_request(organization_id, file_csv)
+      data, _status_code, _headers = create_bulk_import_update_users_request_with_http_info(organization_id, file_csv)
       return data
     end
 
     # Import request for updating users to accounts within the organization.
     # Required scopes: user_write
     # @param organization_id The organization ID Guid
+    # @param file_csv CSV file. 
     # @return [Array<(OrganizationImportResponse, Fixnum, Hash)>] OrganizationImportResponse data, response status code and response headers
-    def create_bulk_import_update_users_request_with_http_info(organization_id)
+    def create_bulk_import_update_users_request_with_http_info(organization_id, file_csv)
       if @api_client.config.debugging
         @api_client.config.logger.debug "Calling API: BulkImportsApi.create_bulk_import_update_users_request ..."
       end
