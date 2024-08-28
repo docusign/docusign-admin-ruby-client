@@ -1,5 +1,5 @@
 =begin
-#DocuSign Admin API
+#Docusign Admin API
 
 #An API for an organization administrator to manage organizations, accounts and users
 
@@ -113,7 +113,7 @@ module DocuSign_Admin
         :'created_by_name' => :'String',
         :'created_by_email' => :'String',
         :'message' => :'String',
-        :'clone_processing_failure_details' => :'CloneErrorDetails'
+        :'clone_processing_failure_details' => :'SubAccountErrorDetails'
       }
     end
 
@@ -202,9 +202,9 @@ module DocuSign_Admin
     def valid?
       return false if @source_account.nil?
       return false if @target_account.nil?
-      asset_group_work_type_validator = EnumAttributeValidator.new('String', ['Undefined', 'GroupAssetFulfillment', 'AccountAssetFulfillment', 'AccountAssetClone', 'AccountAssetCreate'])
+      asset_group_work_type_validator = EnumAttributeValidator.new('String', ['Undefined', 'GroupAssetFulfillment', 'AccountAssetFulfillment', 'AccountAssetClone', 'AccountAssetCreate', 'SubscriptionSync'])
       return false unless asset_group_work_type_validator.valid?(@asset_group_work_type)
-      status_validator = EnumAttributeValidator.new('String', ['Undefined', 'Pending', 'Processing', 'PendingError', 'ProcessingError', 'Completed', 'Canceled', 'PermanentFailure'])
+      status_validator = EnumAttributeValidator.new('String', ['Undefined', 'Pending', 'Processing', 'ProcessingOnHold', 'PendingError', 'ProcessingError', 'Completed', 'Canceled', 'PermanentFailure'])
       return false unless status_validator.valid?(@status)
       true
     end
@@ -212,7 +212,7 @@ module DocuSign_Admin
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] asset_group_work_type Object to be assigned
     def asset_group_work_type=(asset_group_work_type)
-      validator = EnumAttributeValidator.new('String', ['Undefined', 'GroupAssetFulfillment', 'AccountAssetFulfillment', 'AccountAssetClone', 'AccountAssetCreate'])
+      validator = EnumAttributeValidator.new('String', ['Undefined', 'GroupAssetFulfillment', 'AccountAssetFulfillment', 'AccountAssetClone', 'AccountAssetCreate', 'SubscriptionSync'])
       unless validator.valid?(asset_group_work_type)
         fail ArgumentError, 'invalid value for "asset_group_work_type", must be one of #{validator.allowable_values}.'
       end
@@ -222,7 +222,7 @@ module DocuSign_Admin
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
     def status=(status)
-      validator = EnumAttributeValidator.new('String', ['Undefined', 'Pending', 'Processing', 'PendingError', 'ProcessingError', 'Completed', 'Canceled', 'PermanentFailure'])
+      validator = EnumAttributeValidator.new('String', ['Undefined', 'Pending', 'Processing', 'ProcessingOnHold', 'PendingError', 'ProcessingError', 'Completed', 'Canceled', 'PermanentFailure'])
       unless validator.valid?(status)
         fail ArgumentError, 'invalid value for "status", must be one of #{validator.allowable_values}.'
       end
