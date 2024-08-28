@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 
 =begin
-#DocuSign Admin API
+#Docusign Admin API
 
 #An API for an organization administrator to manage organizations, accounts and users
 
@@ -21,8 +21,8 @@ Gem::Specification.new do |s|
   s.authors     = ["DocuSign"]
   s.email       = ["devcenter@docusign.com"]
   s.homepage    = "https://github.com/docusign/docusign-admin-ruby-client"
-  s.summary     = "DocuSign Admin API Ruby Gem"
-  s.description = "The DocuSign Admin API enables you to automate user management with your existing systems while ensuring governance and compliance."
+  s.summary     = "Docusign Admin API Ruby Gem"
+  s.description = "The Docusign Admin API enables you to automate user management with your existing systems while ensuring governance and compliance."
   s.license     = "MIT"
   s.required_ruby_version = ">= 1.9"
 

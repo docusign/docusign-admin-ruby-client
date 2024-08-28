@@ -1,5 +1,5 @@
 =begin
-#DocuSign Admin API
+#Docusign Admin API
 
 #An API for an organization administrator to manage organizations, accounts and users
 
@@ -35,7 +35,7 @@ module DocuSign_Admin
     # @option config [Configuration] Configuration for initializing the object, default to Configuration.default
     def initialize(config = Configuration.default)
       @config = config
-      @user_agent = "Swagger-Codegen/1.3.0/ruby"
+      @user_agent = "Swagger-Codegen/v2.1/2.0.0.rc1/ruby-#{RUBY_VERSION}p#{RUBY_PATCHLEVEL}"
       @default_headers = {
         'Content-Type' => "application/json",
         'User-Agent' => @user_agent
@@ -407,9 +407,9 @@ module DocuSign_Admin
       #raise ArgumentError.new('oAuthBasePath cannot be empty')  unless oauth_base_path
 
       # Derive OAuth Base Path if not given
-      if self.base_path.start_with?("https://demo") or self.base_path.start_with?("http://demo")
+      if self.base_path.nil? or self.base_path.start_with?("https://demo") or self.base_path.start_with?("http://demo") or self.base_path.start_with?("https://apps-d") or self.base_path.start_with?("http://apps-d")
         self.oauth_base_path = OAuth::DEMO_OAUTH_BASE_PATH
-      elsif self.base_path.start_with?("https://stage") or self.base_path.start_with?("http://stage")
+      elsif self.base_path.start_with?("https://stage") or self.base_path.start_with?("http://stage") or self.base_path.start_with?("https://apps-s") or self.base_path.start_with?("http://apps-s")
         self.oauth_base_path = OAuth::STAGE_OAUTH_BASE_PATH
       else
         self.oauth_base_path = OAuth::PRODUCTION_OAUTH_BASE_PATH
@@ -426,7 +426,7 @@ module DocuSign_Admin
     end
 
     # Helper method to configure the OAuth accessCode/implicit flow parameters
-    # @param [String] client_id DocuSign OAuth Client Id(AKA Integrator Key)
+    # @param [String] client_id Docusign OAuth Client Id(AKA Integrator Key)
     # @param scopes The list of requested scopes.  Client applications may be scoped to a limited set of system access.
     # @param [String] redirect_uri This determines where to deliver the response containing the authorization code
     # @param [String] response_type Determines the response type of the authorization request, NOTE: these response types are mutually exclusive for a client application. A public/native client application may only request a response type
@@ -446,8 +446,8 @@ module DocuSign_Admin
     end
 
     # Request JWT User Token
-    # @param [String] client_id DocuSign OAuth Client Id(AKA Integrator Key)
-    # @param [String] user_id DocuSign user Id to be impersonated
+    # @param [String] client_id Docusign OAuth Client Id(AKA Integrator Key)
+    # @param [String] user_id Docusign user Id to be impersonated
     # @param [String] private_key_or_filename the RSA private key
     # @param [Number] expires_in number of seconds remaining before the JWT assertion is considered as invalid
     # @param scopes The list of requested scopes.  Client applications may be scoped to a limited set of system access.
@@ -497,7 +497,7 @@ module DocuSign_Admin
     end
 
     # Request JWT User Token
-    # @param [String] client_id DocuSign OAuth Client Id(AKA Integrator Key)
+    # @param [String] client_id Docusign OAuth Client Id(AKA Integrator Key)
     # @param [String] private_key_or_filename the RSA private key
     # @param [Number] expires_in number of seconds remaining before the JWT assertion is considered as invalid
     # @param scopes The list of requested scopes.  Client applications may be scoped to a limited set of system access.
@@ -559,8 +559,8 @@ module DocuSign_Admin
     end
 
     # GenerateAccessToken will exchange the authorization code for an access token and refresh tokens.
-    # @param [String] client_id DocuSign OAuth Client Id(AKA Integrator Key)
-    # @param [String] client_secret The secret key you generated when you set up the integration in DocuSign Admin console.
+    # @param [String] client_id Docusign OAuth Client Id(AKA Integrator Key)
+    # @param [String] client_secret The secret key you generated when you set up the integration in Docusign Admin console.
     # @param [String] code The authorization code
     def generate_access_token(client_id, client_secret, code)
       raise ArgumentError.new('client_id cannot be empty')  if client_id.empty?

@@ -1,5 +1,5 @@
 =begin
-#DocuSign Admin API
+#Docusign Admin API
 
 #An API for an organization administrator to manage organizations, accounts and users
 
@@ -73,6 +73,9 @@ module DocuSign_Admin
 
     # Select users whose data have been modified since the date specified;  account_id or organization_reserved_domain_id must be specified.
     attr_accessor :last_modified_since
+
+    # Select users with groups the users belong to; The organization must have entitlement AllowMultiApplication enabled.
+    attr_accessor :include_ds_groups
 
     def self.default
       @@default ||= GetUsersOptions.new
@@ -644,6 +647,7 @@ module DocuSign_Admin
       query_params[:'account_id'] = options.account_id if !options.account_id.nil?
       query_params[:'organization_reserved_domain_id'] = options.organization_reserved_domain_id if !options.organization_reserved_domain_id.nil?
       query_params[:'last_modified_since'] = options.last_modified_since if !options.last_modified_since.nil?
+      query_params[:'include_ds_groups'] = options.include_ds_groups if !options.include_ds_groups.nil?
 
       # header parameters
       header_params = {}
