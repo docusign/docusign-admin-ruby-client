@@ -61,12 +61,14 @@ module DocuSign_Admin
 
     attr_accessor :created_by
 
+    # 0 stands for Application, 1 stands for User, 2 stands for Generic, 3 stands for RestAPIAuth, 4 stands for Resource, 5 stands for Restricted
     attr_accessor :created_by_type
 
     attr_accessor :created_date
 
     attr_accessor :updated_by
 
+    # 0 stands for Application, 1 stands for User, 2 stands for Generic, 3 stands for RestAPIAuth, 4 stands for Resource, 5 stands for Restricted
     attr_accessor :updated_by_type
 
     attr_accessor :updated_date
@@ -158,10 +160,10 @@ module DocuSign_Admin
         :'source_system' => :'String',
         :'source_id' => :'String',
         :'created_by' => :'String',
-        :'created_by_type' => :'String',
+        :'created_by_type' => :'Integer',
         :'created_date' => :'DateTime',
         :'updated_by' => :'String',
-        :'updated_by_type' => :'String',
+        :'updated_by_type' => :'Integer',
         :'updated_date' => :'DateTime',
         :'update_history' => :'Array<SubscriptionProvisionModelChangeEvent>'
       }
@@ -312,9 +314,9 @@ module DocuSign_Admin
       return false unless asset_group_work_type_validator.valid?(@asset_group_work_type)
       status_validator = EnumAttributeValidator.new('String', ['Undefined', 'Pending', 'Processing', 'ProcessingOnHold', 'PendingError', 'ProcessingError', 'Completed', 'Canceled', 'PermanentFailure'])
       return false unless status_validator.valid?(@status)
-      created_by_type_validator = EnumAttributeValidator.new('String', ['Application', 'User', 'Generic', 'RestAPIAuth', 'Resource', 'Restricted'])
+      created_by_type_validator = EnumAttributeValidator.new('Integer', ['0', '1', '2', '3', '4', '5'])
       return false unless created_by_type_validator.valid?(@created_by_type)
-      updated_by_type_validator = EnumAttributeValidator.new('String', ['Application', 'User', 'Generic', 'RestAPIAuth', 'Resource', 'Restricted'])
+      updated_by_type_validator = EnumAttributeValidator.new('Integer', ['0', '1', '2', '3', '4', '5'])
       return false unless updated_by_type_validator.valid?(@updated_by_type)
       true
     end
@@ -342,7 +344,7 @@ module DocuSign_Admin
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] created_by_type Object to be assigned
     def created_by_type=(created_by_type)
-      validator = EnumAttributeValidator.new('String', ['Application', 'User', 'Generic', 'RestAPIAuth', 'Resource', 'Restricted'])
+      validator = EnumAttributeValidator.new('Integer', ['0', '1', '2', '3', '4', '5'])
       unless validator.valid?(created_by_type)
         fail ArgumentError, 'invalid value for "created_by_type", must be one of #{validator.allowable_values}.'
       end
@@ -352,7 +354,7 @@ module DocuSign_Admin
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] updated_by_type Object to be assigned
     def updated_by_type=(updated_by_type)
-      validator = EnumAttributeValidator.new('String', ['Application', 'User', 'Generic', 'RestAPIAuth', 'Resource', 'Restricted'])
+      validator = EnumAttributeValidator.new('Integer', ['0', '1', '2', '3', '4', '5'])
       unless validator.valid?(updated_by_type)
         fail ArgumentError, 'invalid value for "updated_by_type", must be one of #{validator.allowable_values}.'
       end

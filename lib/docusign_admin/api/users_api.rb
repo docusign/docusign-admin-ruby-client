@@ -74,7 +74,7 @@ module DocuSign_Admin
     # Select users whose data have been modified since the date specified;  account_id or organization_reserved_domain_id must be specified.
     attr_accessor :last_modified_since
 
-    # Select users with groups the users belong to; The organization must have entitlement AllowMultiApplication enabled.
+    # Select users with groups the users belong to; account_id must be specified. The organization must have the entitlement AllowMultiApplication enabled.
     attr_accessor :include_ds_groups
 
     def self.default

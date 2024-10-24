@@ -27,6 +27,7 @@ module DocuSign_Admin
 
     attr_accessor :admin_user
 
+    # 0 stands for Web, 1 stands for Direct
     attr_accessor :billing_profile_type
 
     class EnumAttributeValidator
@@ -75,7 +76,7 @@ module DocuSign_Admin
         :'site' => :'String',
         :'address' => :'DocuSignAccountDomainModelAddress',
         :'admin_user' => :'SubscriptionProvisionModelAccountCreateAccountAdmin',
-        :'billing_profile_type' => :'String'
+        :'billing_profile_type' => :'Integer'
       }
     end
 
@@ -130,7 +131,7 @@ module DocuSign_Admin
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      billing_profile_type_validator = EnumAttributeValidator.new('String', ['Web', 'Direct'])
+      billing_profile_type_validator = EnumAttributeValidator.new('Integer', ['0', '1'])
       return false unless billing_profile_type_validator.valid?(@billing_profile_type)
       true
     end
@@ -138,7 +139,7 @@ module DocuSign_Admin
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] billing_profile_type Object to be assigned
     def billing_profile_type=(billing_profile_type)
-      validator = EnumAttributeValidator.new('String', ['Web', 'Direct'])
+      validator = EnumAttributeValidator.new('Integer', ['0', '1'])
       unless validator.valid?(billing_profile_type)
         fail ArgumentError, 'invalid value for "billing_profile_type", must be one of #{validator.allowable_values}.'
       end
