@@ -1,3 +1,9 @@
+## [v2.0.0] - Admin API v2.1-1.4.1 - 2024-10-28
+### Changed
+- Added support for version v2.1-1.4.1 of the DocuSign Admin API.
+- Removed the staging base path and OAuth path constant.
+- Updated the SDK release version.
+
 ## [v2.0.0.rc2] - Admin API v2.1-1.4.1 - 2024-10-22
 ### Changed
 - Added support for version v2.1-1.4.1 of the DocuSign Admin API.
