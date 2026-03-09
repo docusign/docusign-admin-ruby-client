@@ -35,6 +35,8 @@ module DocuSign_Admin
 
     attr_accessor :account_name
 
+    attr_accessor :is_managed_by_scim
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -48,7 +50,8 @@ module DocuSign_Admin
         :'last_modified_on' => :'last_modified_on',
         :'user_count' => :'user_count',
         :'external_account_id' => :'external_account_id',
-        :'account_name' => :'account_name'
+        :'account_name' => :'account_name',
+        :'is_managed_by_scim' => :'is_managed_by_scim'
       }
     end
 
@@ -65,7 +68,8 @@ module DocuSign_Admin
         :'last_modified_on' => :'DateTime',
         :'user_count' => :'Integer',
         :'external_account_id' => :'Integer',
-        :'account_name' => :'String'
+        :'account_name' => :'String',
+        :'is_managed_by_scim' => :'BOOLEAN'
       }
     end
 
@@ -120,6 +124,10 @@ module DocuSign_Admin
       if attributes.has_key?(:'account_name')
         self.account_name = attributes[:'account_name']
       end
+
+      if attributes.has_key?(:'is_managed_by_scim')
+        self.is_managed_by_scim = attributes[:'is_managed_by_scim']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -150,7 +158,8 @@ module DocuSign_Admin
           last_modified_on == o.last_modified_on &&
           user_count == o.user_count &&
           external_account_id == o.external_account_id &&
-          account_name == o.account_name
+          account_name == o.account_name &&
+          is_managed_by_scim == o.is_managed_by_scim
     end
 
     # @see the `==` method
@@ -162,7 +171,7 @@ module DocuSign_Admin
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [ds_group_id, account_id, source_product_name, group_id, group_name, description, is_admin, last_modified_on, user_count, external_account_id, account_name].hash
+      [ds_group_id, account_id, source_product_name, group_id, group_name, description, is_admin, last_modified_on, user_count, external_account_id, account_name, is_managed_by_scim].hash
     end
 
     # Builds the object from hash

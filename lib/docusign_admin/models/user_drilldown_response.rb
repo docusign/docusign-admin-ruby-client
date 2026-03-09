@@ -49,6 +49,14 @@ module DocuSign_Admin
 
     attr_accessor :device_verification_enabled
 
+    attr_accessor :require_two_step_verification
+
+    attr_accessor :allow_two_step_verification_snooze
+
+    attr_accessor :allow_extend_org_admin_rights_to_self
+
+    attr_accessor :is_managed_by_scim
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -69,7 +77,11 @@ module DocuSign_Admin
         :'last_login' => :'last_login',
         :'memberships' => :'memberships',
         :'identities' => :'identities',
-        :'device_verification_enabled' => :'device_verification_enabled'
+        :'device_verification_enabled' => :'device_verification_enabled',
+        :'require_two_step_verification' => :'require_two_step_verification',
+        :'allow_two_step_verification_snooze' => :'allow_two_step_verification_snooze',
+        :'allow_extend_org_admin_rights_to_self' => :'allow_extend_org_admin_rights_to_self',
+        :'is_managed_by_scim' => :'is_managed_by_scim'
       }
     end
 
@@ -93,7 +105,11 @@ module DocuSign_Admin
         :'last_login' => :'DateTime',
         :'memberships' => :'Array<MembershipResponse>',
         :'identities' => :'Array<UserIdentityResponse>',
-        :'device_verification_enabled' => :'BOOLEAN'
+        :'device_verification_enabled' => :'BOOLEAN',
+        :'require_two_step_verification' => :'BOOLEAN',
+        :'allow_two_step_verification_snooze' => :'BOOLEAN',
+        :'allow_extend_org_admin_rights_to_self' => :'BOOLEAN',
+        :'is_managed_by_scim' => :'BOOLEAN'
       }
     end
 
@@ -180,6 +196,22 @@ module DocuSign_Admin
       if attributes.has_key?(:'device_verification_enabled')
         self.device_verification_enabled = attributes[:'device_verification_enabled']
       end
+
+      if attributes.has_key?(:'require_two_step_verification')
+        self.require_two_step_verification = attributes[:'require_two_step_verification']
+      end
+
+      if attributes.has_key?(:'allow_two_step_verification_snooze')
+        self.allow_two_step_verification_snooze = attributes[:'allow_two_step_verification_snooze']
+      end
+
+      if attributes.has_key?(:'allow_extend_org_admin_rights_to_self')
+        self.allow_extend_org_admin_rights_to_self = attributes[:'allow_extend_org_admin_rights_to_self']
+      end
+
+      if attributes.has_key?(:'is_managed_by_scim')
+        self.is_managed_by_scim = attributes[:'is_managed_by_scim']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -217,7 +249,11 @@ module DocuSign_Admin
           last_login == o.last_login &&
           memberships == o.memberships &&
           identities == o.identities &&
-          device_verification_enabled == o.device_verification_enabled
+          device_verification_enabled == o.device_verification_enabled &&
+          require_two_step_verification == o.require_two_step_verification &&
+          allow_two_step_verification_snooze == o.allow_two_step_verification_snooze &&
+          allow_extend_org_admin_rights_to_self == o.allow_extend_org_admin_rights_to_self &&
+          is_managed_by_scim == o.is_managed_by_scim
     end
 
     # @see the `==` method
@@ -229,7 +265,7 @@ module DocuSign_Admin
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, site_id, site_name, user_name, first_name, last_name, user_status, default_account_id, default_account_name, language_culture, selected_languages, federated_status, is_organization_admin, created_on, last_login, memberships, identities, device_verification_enabled].hash
+      [id, site_id, site_name, user_name, first_name, last_name, user_status, default_account_id, default_account_name, language_culture, selected_languages, federated_status, is_organization_admin, created_on, last_login, memberships, identities, device_verification_enabled, require_two_step_verification, allow_two_step_verification_snooze, allow_extend_org_admin_rights_to_self, is_managed_by_scim].hash
     end
 
     # Builds the object from hash

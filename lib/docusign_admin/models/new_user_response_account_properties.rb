@@ -25,6 +25,14 @@ module DocuSign_Admin
 
     attr_accessor :job_title
 
+    attr_accessor :license_type
+
+    attr_accessor :subscription_id
+
+    attr_accessor :plan_name
+
+    attr_accessor :license_status
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -33,7 +41,11 @@ module DocuSign_Admin
         :'permission_profile' => :'permission_profile',
         :'groups' => :'groups',
         :'company_name' => :'company_name',
-        :'job_title' => :'job_title'
+        :'job_title' => :'job_title',
+        :'license_type' => :'license_type',
+        :'subscription_id' => :'subscription_id',
+        :'plan_name' => :'plan_name',
+        :'license_status' => :'license_status'
       }
     end
 
@@ -45,7 +57,11 @@ module DocuSign_Admin
         :'permission_profile' => :'PermissionProfileResponse',
         :'groups' => :'Array<MemberGroupResponse>',
         :'company_name' => :'String',
-        :'job_title' => :'String'
+        :'job_title' => :'String',
+        :'license_type' => :'String',
+        :'subscription_id' => :'String',
+        :'plan_name' => :'String',
+        :'license_status' => :'String'
       }
     end
 
@@ -82,6 +98,22 @@ module DocuSign_Admin
       if attributes.has_key?(:'job_title')
         self.job_title = attributes[:'job_title']
       end
+
+      if attributes.has_key?(:'license_type')
+        self.license_type = attributes[:'license_type']
+      end
+
+      if attributes.has_key?(:'subscription_id')
+        self.subscription_id = attributes[:'subscription_id']
+      end
+
+      if attributes.has_key?(:'plan_name')
+        self.plan_name = attributes[:'plan_name']
+      end
+
+      if attributes.has_key?(:'license_status')
+        self.license_status = attributes[:'license_status']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -107,7 +139,11 @@ module DocuSign_Admin
           permission_profile == o.permission_profile &&
           groups == o.groups &&
           company_name == o.company_name &&
-          job_title == o.job_title
+          job_title == o.job_title &&
+          license_type == o.license_type &&
+          subscription_id == o.subscription_id &&
+          plan_name == o.plan_name &&
+          license_status == o.license_status
     end
 
     # @see the `==` method
@@ -119,7 +155,7 @@ module DocuSign_Admin
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, site_id, permission_profile, groups, company_name, job_title].hash
+      [id, site_id, permission_profile, groups, company_name, job_title, license_type, subscription_id, plan_name, license_status].hash
     end
 
     # Builds the object from hash

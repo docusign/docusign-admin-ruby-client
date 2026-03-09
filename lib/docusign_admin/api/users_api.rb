@@ -17,6 +17,9 @@ module DocuSign_Admin
     # Sorts user information by account name ascending
     attr_accessor :sort
 
+    # When true: additional details about the user's license will be included in the response. The account must have an IAM plan with licenses.
+    attr_accessor :include_license
+
     def self.default
       @@default ||= GetUserDSProfileOptions.new
     end
@@ -29,6 +32,9 @@ module DocuSign_Admin
     # Sorts user information by account name ascending
     attr_accessor :sort
 
+    # When true: additional details about the user's license will be included in the response. The account must have an IAM plan with licenses.
+    attr_accessor :include_license
+
     def self.default
       @@default ||= GetUserDSProfilesByEmailOptions.new
     end
@@ -37,6 +43,9 @@ module DocuSign_Admin
   class GetUserProfilesOptions
     # The email address
     attr_accessor :email
+
+    # When true: additional details about the user's license will be included in the response. The account must have an IAM plan with licenses.
+    attr_accessor :include_license
 
     def self.default
       @@default ||= GetUserProfilesOptions.new
@@ -77,8 +86,20 @@ module DocuSign_Admin
     # Select users with groups the users belong to; account_id must be specified. The organization must have the entitlement AllowMultiApplication enabled.
     attr_accessor :include_ds_groups
 
+    # When true: additional details about the user's license will be included in the response; account_id must be specified and the account must have an IAM plan with licenses.
+    attr_accessor :include_license
+
     def self.default
       @@default ||= GetUsersOptions.new
+    end
+  end
+
+  class UpdateUserOptions
+    # If an account has an IAM plan with licenses, this query specifies how a user's license is handled. Values: true - Updates the user's existing license; false - Adds a license to the user
+    attr_accessor :apply_license_override
+
+    def self.default
+      @@default ||= UpdateUserOptions.new
     end
   end
 
@@ -475,6 +496,7 @@ module DocuSign_Admin
       # query parameters
       query_params = {}
       query_params[:'sort'] = options.sort if !options.sort.nil?
+      query_params[:'include_license'] = options.include_license if !options.include_license.nil?
 
       # header parameters
       header_params = {}
@@ -530,6 +552,7 @@ module DocuSign_Admin
       query_params = {}
       query_params[:'email'] = options.email if !options.email.nil?
       query_params[:'sort'] = options.sort if !options.sort.nil?
+      query_params[:'include_license'] = options.include_license if !options.include_license.nil?
 
       # header parameters
       header_params = {}
@@ -584,6 +607,7 @@ module DocuSign_Admin
       # query parameters
       query_params = {}
       query_params[:'email'] = options.email if !options.email.nil?
+      query_params[:'include_license'] = options.include_license if !options.include_license.nil?
 
       # header parameters
       header_params = {}
@@ -648,6 +672,7 @@ module DocuSign_Admin
       query_params[:'organization_reserved_domain_id'] = options.organization_reserved_domain_id if !options.organization_reserved_domain_id.nil?
       query_params[:'last_modified_since'] = options.last_modified_since if !options.last_modified_since.nil?
       query_params[:'include_ds_groups'] = options.include_ds_groups if !options.include_ds_groups.nil?
+      query_params[:'include_license'] = options.include_license if !options.include_license.nil?
 
       # header parameters
       header_params = {}
@@ -734,9 +759,10 @@ module DocuSign_Admin
     # Required scopes: user_write
     # @param organization_id The organization ID Guid
     # @param request The user details to update 
+    # @param DocuSign_Admin::UpdateUserOptions Options for modifying the behavior of the function.
     # @return [UsersUpdateResponse]
-    def update_user(organization_id, request)
-      data, _status_code, _headers = update_user_with_http_info(organization_id,  request)
+    def update_user(organization_id, request, options = DocuSign_Admin::UpdateUserOptions.default)
+      data, _status_code, _headers = update_user_with_http_info(organization_id,  request, options)
       return data
     end
 
@@ -744,8 +770,9 @@ module DocuSign_Admin
     # Required scopes: user_write
     # @param organization_id The organization ID Guid
     # @param request The user details to update 
+    # @param DocuSign_Admin::UpdateUserOptions Options for modifying the behavior of the function.
     # @return [Array<(UsersUpdateResponse, Fixnum, Hash)>] UsersUpdateResponse data, response status code and response headers
-    def update_user_with_http_info(organization_id, request)
+    def update_user_with_http_info(organization_id, request, options = DocuSign_Admin::UpdateUserOptions.default)
       if @api_client.config.debugging
         @api_client.config.logger.debug "Calling API: UsersApi.update_user ..."
       end
@@ -758,6 +785,7 @@ module DocuSign_Admin
 
       # query parameters
       query_params = {}
+      query_params[:'apply_license_override'] = options.apply_license_override if !options.apply_license_override.nil?
 
       # header parameters
       header_params = {}

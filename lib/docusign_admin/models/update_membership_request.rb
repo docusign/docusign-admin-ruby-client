@@ -27,6 +27,8 @@ module DocuSign_Admin
 
     attr_accessor :access_code
 
+    attr_accessor :license_type
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -36,7 +38,8 @@ module DocuSign_Admin
         :'company_name' => :'company_name',
         :'job_title' => :'job_title',
         :'send_activation' => :'send_activation',
-        :'access_code' => :'access_code'
+        :'access_code' => :'access_code',
+        :'license_type' => :'license_type'
       }
     end
 
@@ -49,7 +52,8 @@ module DocuSign_Admin
         :'company_name' => :'String',
         :'job_title' => :'String',
         :'send_activation' => :'BOOLEAN',
-        :'access_code' => :'String'
+        :'access_code' => :'String',
+        :'license_type' => :'String'
       }
     end
 
@@ -90,6 +94,10 @@ module DocuSign_Admin
       if attributes.has_key?(:'access_code')
         self.access_code = attributes[:'access_code']
       end
+
+      if attributes.has_key?(:'license_type')
+        self.license_type = attributes[:'license_type']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -121,7 +129,8 @@ module DocuSign_Admin
           company_name == o.company_name &&
           job_title == o.job_title &&
           send_activation == o.send_activation &&
-          access_code == o.access_code
+          access_code == o.access_code &&
+          license_type == o.license_type
     end
 
     # @see the `==` method
@@ -133,7 +142,7 @@ module DocuSign_Admin
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [account_id, permission_profile, groups, company_name, job_title, send_activation, access_code].hash
+      [account_id, permission_profile, groups, company_name, job_title, send_activation, access_code, license_type].hash
     end
 
     # Builds the object from hash

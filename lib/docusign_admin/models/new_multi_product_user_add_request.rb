@@ -35,6 +35,8 @@ module DocuSign_Admin
 
     attr_accessor :auto_activate_memberships
 
+    attr_accessor :license_type
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -48,7 +50,8 @@ module DocuSign_Admin
         :'language_culture' => :'language_culture',
         :'access_code' => :'access_code',
         :'federated_status' => :'federated_status',
-        :'auto_activate_memberships' => :'auto_activate_memberships'
+        :'auto_activate_memberships' => :'auto_activate_memberships',
+        :'license_type' => :'license_type'
       }
     end
 
@@ -65,7 +68,8 @@ module DocuSign_Admin
         :'language_culture' => :'String',
         :'access_code' => :'String',
         :'federated_status' => :'String',
-        :'auto_activate_memberships' => :'BOOLEAN'
+        :'auto_activate_memberships' => :'BOOLEAN',
+        :'license_type' => :'String'
       }
     end
 
@@ -124,6 +128,10 @@ module DocuSign_Admin
       if attributes.has_key?(:'auto_activate_memberships')
         self.auto_activate_memberships = attributes[:'auto_activate_memberships']
       end
+
+      if attributes.has_key?(:'license_type')
+        self.license_type = attributes[:'license_type']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -164,7 +172,8 @@ module DocuSign_Admin
           language_culture == o.language_culture &&
           access_code == o.access_code &&
           federated_status == o.federated_status &&
-          auto_activate_memberships == o.auto_activate_memberships
+          auto_activate_memberships == o.auto_activate_memberships &&
+          license_type == o.license_type
     end
 
     # @see the `==` method
@@ -176,7 +185,7 @@ module DocuSign_Admin
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [product_permission_profiles, ds_groups, user_name, first_name, last_name, email, default_account_id, language_culture, access_code, federated_status, auto_activate_memberships].hash
+      [product_permission_profiles, ds_groups, user_name, first_name, last_name, email, default_account_id, language_culture, access_code, federated_status, auto_activate_memberships, license_type].hash
     end
 
     # Builds the object from hash
