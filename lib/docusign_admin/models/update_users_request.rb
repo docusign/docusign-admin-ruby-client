@@ -15,17 +15,22 @@ module DocuSign_Admin
   class UpdateUsersRequest
     attr_accessor :users
 
+    # When set to **true**, the user's memberships will be automatically activated on reactivation.
+    attr_accessor :auto_activate_memberships_on_reactivation
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'users' => :'users'
+        :'users' => :'users',
+        :'auto_activate_memberships_on_reactivation' => :'auto_activate_memberships_on_reactivation'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'users' => :'Array<UpdateUserRequest>'
+        :'users' => :'Array<UpdateUserRequest>',
+        :'auto_activate_memberships_on_reactivation' => :'BOOLEAN'
       }
     end
 
@@ -41,6 +46,10 @@ module DocuSign_Admin
         if (value = attributes[:'users']).is_a?(Array)
           self.users = value
         end
+      end
+
+      if attributes.has_key?(:'auto_activate_memberships_on_reactivation')
+        self.auto_activate_memberships_on_reactivation = attributes[:'auto_activate_memberships_on_reactivation']
       end
     end
 
@@ -62,7 +71,8 @@ module DocuSign_Admin
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          users == o.users
+          users == o.users &&
+          auto_activate_memberships_on_reactivation == o.auto_activate_memberships_on_reactivation
     end
 
     # @see the `==` method
@@ -74,7 +84,7 @@ module DocuSign_Admin
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [users].hash
+      [users, auto_activate_memberships_on_reactivation].hash
     end
 
     # Builds the object from hash

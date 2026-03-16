@@ -29,11 +29,25 @@ module DocuSign_Admin
 
     attr_accessor :created_on
 
+    attr_accessor :closed_on
+
     attr_accessor :membership_created_on
+
+    attr_accessor :membership_closed_on
 
     attr_accessor :ds_groups
 
     attr_accessor :membership_id
+
+    attr_accessor :is_membership_managed_by_scim
+
+    attr_accessor :is_managed_by_scim
+
+    attr_accessor :license_type
+
+    attr_accessor :subscription_id
+
+    attr_accessor :plan_name
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -46,9 +60,16 @@ module DocuSign_Admin
         :'membership_status' => :'membership_status',
         :'email' => :'email',
         :'created_on' => :'created_on',
+        :'closed_on' => :'closed_on',
         :'membership_created_on' => :'membership_created_on',
+        :'membership_closed_on' => :'membership_closed_on',
         :'ds_groups' => :'ds_groups',
-        :'membership_id' => :'membership_id'
+        :'membership_id' => :'membership_id',
+        :'is_membership_managed_by_scim' => :'is_membership_managed_by_scim',
+        :'is_managed_by_scim' => :'is_managed_by_scim',
+        :'license_type' => :'license_type',
+        :'subscription_id' => :'subscription_id',
+        :'plan_name' => :'plan_name'
       }
     end
 
@@ -63,9 +84,16 @@ module DocuSign_Admin
         :'membership_status' => :'String',
         :'email' => :'String',
         :'created_on' => :'DateTime',
+        :'closed_on' => :'DateTime',
         :'membership_created_on' => :'DateTime',
+        :'membership_closed_on' => :'DateTime',
         :'ds_groups' => :'Array<DSGroupResponse>',
-        :'membership_id' => :'String'
+        :'membership_id' => :'String',
+        :'is_membership_managed_by_scim' => :'BOOLEAN',
+        :'is_managed_by_scim' => :'BOOLEAN',
+        :'license_type' => :'String',
+        :'subscription_id' => :'String',
+        :'plan_name' => :'String'
       }
     end
 
@@ -109,8 +137,16 @@ module DocuSign_Admin
         self.created_on = attributes[:'created_on']
       end
 
+      if attributes.has_key?(:'closed_on')
+        self.closed_on = attributes[:'closed_on']
+      end
+
       if attributes.has_key?(:'membership_created_on')
         self.membership_created_on = attributes[:'membership_created_on']
+      end
+
+      if attributes.has_key?(:'membership_closed_on')
+        self.membership_closed_on = attributes[:'membership_closed_on']
       end
 
       if attributes.has_key?(:'ds_groups')
@@ -121,6 +157,26 @@ module DocuSign_Admin
 
       if attributes.has_key?(:'membership_id')
         self.membership_id = attributes[:'membership_id']
+      end
+
+      if attributes.has_key?(:'is_membership_managed_by_scim')
+        self.is_membership_managed_by_scim = attributes[:'is_membership_managed_by_scim']
+      end
+
+      if attributes.has_key?(:'is_managed_by_scim')
+        self.is_managed_by_scim = attributes[:'is_managed_by_scim']
+      end
+
+      if attributes.has_key?(:'license_type')
+        self.license_type = attributes[:'license_type']
+      end
+
+      if attributes.has_key?(:'subscription_id')
+        self.subscription_id = attributes[:'subscription_id']
+      end
+
+      if attributes.has_key?(:'plan_name')
+        self.plan_name = attributes[:'plan_name']
       end
     end
 
@@ -150,9 +206,16 @@ module DocuSign_Admin
           membership_status == o.membership_status &&
           email == o.email &&
           created_on == o.created_on &&
+          closed_on == o.closed_on &&
           membership_created_on == o.membership_created_on &&
+          membership_closed_on == o.membership_closed_on &&
           ds_groups == o.ds_groups &&
-          membership_id == o.membership_id
+          membership_id == o.membership_id &&
+          is_membership_managed_by_scim == o.is_membership_managed_by_scim &&
+          is_managed_by_scim == o.is_managed_by_scim &&
+          license_type == o.license_type &&
+          subscription_id == o.subscription_id &&
+          plan_name == o.plan_name
     end
 
     # @see the `==` method
@@ -164,7 +227,7 @@ module DocuSign_Admin
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, user_name, first_name, last_name, user_status, membership_status, email, created_on, membership_created_on, ds_groups, membership_id].hash
+      [id, user_name, first_name, last_name, user_status, membership_status, email, created_on, closed_on, membership_created_on, membership_closed_on, ds_groups, membership_id, is_membership_managed_by_scim, is_managed_by_scim, license_type, subscription_id, plan_name].hash
     end
 
     # Builds the object from hash

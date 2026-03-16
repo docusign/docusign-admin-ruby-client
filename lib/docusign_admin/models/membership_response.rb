@@ -13,6 +13,8 @@ require 'date'
 
 module DocuSign_Admin
   class MembershipResponse
+    attr_accessor :id
+
     attr_accessor :email
 
     attr_accessor :account_id
@@ -33,9 +35,16 @@ module DocuSign_Admin
 
     attr_accessor :is_admin
 
+    attr_accessor :license_type
+
+    attr_accessor :subscription_id
+
+    attr_accessor :plan_name
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'id' => :'id',
         :'email' => :'email',
         :'account_id' => :'account_id',
         :'external_account_id' => :'external_account_id',
@@ -45,13 +54,17 @@ module DocuSign_Admin
         :'permission_profile' => :'permission_profile',
         :'created_on' => :'created_on',
         :'groups' => :'groups',
-        :'is_admin' => :'is_admin'
+        :'is_admin' => :'is_admin',
+        :'license_type' => :'license_type',
+        :'subscription_id' => :'subscription_id',
+        :'plan_name' => :'plan_name'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
+        :'id' => :'String',
         :'email' => :'String',
         :'account_id' => :'String',
         :'external_account_id' => :'String',
@@ -61,7 +74,10 @@ module DocuSign_Admin
         :'permission_profile' => :'PermissionProfileResponse',
         :'created_on' => :'DateTime',
         :'groups' => :'Array<MemberGroupResponse>',
-        :'is_admin' => :'BOOLEAN'
+        :'is_admin' => :'BOOLEAN',
+        :'license_type' => :'String',
+        :'subscription_id' => :'String',
+        :'plan_name' => :'String'
       }
     end
 
@@ -72,6 +88,10 @@ module DocuSign_Admin
 
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
+
+      if attributes.has_key?(:'id')
+        self.id = attributes[:'id']
+      end
 
       if attributes.has_key?(:'email')
         self.email = attributes[:'email']
@@ -114,6 +134,18 @@ module DocuSign_Admin
       if attributes.has_key?(:'is_admin')
         self.is_admin = attributes[:'is_admin']
       end
+
+      if attributes.has_key?(:'license_type')
+        self.license_type = attributes[:'license_type']
+      end
+
+      if attributes.has_key?(:'subscription_id')
+        self.subscription_id = attributes[:'subscription_id']
+      end
+
+      if attributes.has_key?(:'plan_name')
+        self.plan_name = attributes[:'plan_name']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -134,6 +166,7 @@ module DocuSign_Admin
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          id == o.id &&
           email == o.email &&
           account_id == o.account_id &&
           external_account_id == o.external_account_id &&
@@ -143,7 +176,10 @@ module DocuSign_Admin
           permission_profile == o.permission_profile &&
           created_on == o.created_on &&
           groups == o.groups &&
-          is_admin == o.is_admin
+          is_admin == o.is_admin &&
+          license_type == o.license_type &&
+          subscription_id == o.subscription_id &&
+          plan_name == o.plan_name
     end
 
     # @see the `==` method
@@ -155,7 +191,7 @@ module DocuSign_Admin
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [email, account_id, external_account_id, account_name, is_external_account, status, permission_profile, created_on, groups, is_admin].hash
+      [id, email, account_id, external_account_id, account_name, is_external_account, status, permission_profile, created_on, groups, is_admin, license_type, subscription_id, plan_name].hash
     end
 
     # Builds the object from hash

@@ -21,7 +21,7 @@ module DocuSign_Admin
       @api_client = api_client
     end
 
-    # Creates a  new Account Setting Export request.
+    # Creates a new Account Setting Export request.
     # Required scopes: account_read
     # @param organization_id The organization ID Guid
     # @param request Request body containing details about the accounts be compared 
@@ -31,7 +31,7 @@ module DocuSign_Admin
       return data
     end
 
-    # Creates a  new Account Setting Export request.
+    # Creates a new Account Setting Export request.
     # Required scopes: account_read
     # @param organization_id The organization ID Guid
     # @param request Request body containing details about the accounts be compared 
